@@ -17,6 +17,11 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    /**
+     * Retrieves all products.
+     *
+     * @return a list of all products
+     */
     public List<ProdutoDTO> obterTodos() {
         // Retorna uma lista de produtos
         List<Produto> produtos = produtoRepository.findAll();
@@ -28,6 +33,13 @@ public class ProdutoService {
 
     }
 
+    /**
+        * Retrieves a product by its ID.
+        *
+        * @param ID the ID of the product to retrieve
+        * @return an Optional containing the ProductDTO if found, or an empty Optional if not found
+        * @throws ResourceNotFoundException if the product with the given ID is not found
+        */
     @SuppressWarnings("null")
     public Optional<ProdutoDTO> obterPorID(Integer ID) {
         Optional<Produto> produto = produtoRepository.findById(ID);
@@ -39,6 +51,10 @@ public class ProdutoService {
         return Optional.of(convertProduct(produto.get()));
     }
 
+    /**
+     * This class represents a data transfer object (DTO) for a Produto.
+     * It contains the necessary fields and methods to transfer Produto data between different layers of the application.
+     */
     public ProdutoDTO adicionar(ProdutoDTO produtoDto) {
         produtoDto.setId(null);
         Produto produto = new Produto();
